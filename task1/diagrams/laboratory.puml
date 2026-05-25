@@ -1,0 +1,30 @@
+@startuml
+title Laboratory Analysis Process
+
+actor Клиент
+actor Врач
+actor "Сотрудник лаборатории" as LabEmployee
+
+(1.0\nНазначение и обработка анализов) as LabProc
+
+rectangle Excel
+rectangle "Файловый сервер" as fileServer
+rectangle "Лабораторная система" as labSystem
+
+database "D1: Реестр анализов Excel" as xlsx
+database "D2: Файлы пациента" as patientFiles
+
+
+Клиент --> Врач : Жалобы\nPII, MEDICAL (Жалобы)
+Врач --> LabProc : Назначение анализов\nPII, MEDICAL (Назначения)
+
+LabProc --> Excel : Назначение анализов\nPII, MEDICAL (Назначения)
+Excel --> fileServer : Сохранение файла реестра анализов в xlsx\nPII, MEDICAL (Назначения)
+fileServer --> xlsx : Сохранение файла реестра анализов в xlsx\nPII, MEDICAL (Назначения)
+
+LabProc --> labSystem : Назначение анализов\nPII, MEDICAL (Назначения)
+LabEmployee --> labSystem : Результаты анализов\nPII, MEDICAL (Результаты)
+labSystem --> fileServer : Результаты анализов\nPII, MEDICAL (Результаты)
+fileServer --> patientFiles : Результаты анализов\nPII, MEDICAL (Результаты)
+
+@enduml

@@ -1,0 +1,30 @@
+@startuml
+title Payment
+
+actor Администратор
+actor Клиент
+actor Кассир
+
+(1.0\nОбработка оплаты) as PaymentProc
+
+rectangle ККМ
+rectangle Excel
+rectangle "1С Бухгалтерия" as 1cF
+
+database "D1: Файл 1С Бухгалтерия" as 1cF_File
+database "D2: Файл счетов Excel" as xlsx
+
+Администратор --> Клиент : Счёт на оплату\n FINANCIAL (Сумма), SERVICES (Услуги)
+Клиент --> Кассир : Счёт на оплату\n FINANCIAL (Сумма), SERVICES (Услуги)
+Кассир --> PaymentProc : Данные оплаты\n FINANCIAL (Сумма), SERVICES (Услуги)
+
+PaymentProc --> Клиент : Чек\n FINANCIAL (Сумма), SERVICES (Услуги)
+
+PaymentProc --> ККМ : Внесение оплаты\n FINANCIAL (Сумма), SERVICES (Услуги)
+ККМ --> 1cF : Регистрация оплаты\n FINANCIAL (Сумма), SERVICES (Услуги)
+1cF --> 1cF_File : Сохранение в файл\n FINANCIAL (Сумма), SERVICES (Услуги)
+
+PaymentProc --> Excel : Внесение оплаты\n FINANCIAL (Сумма), SERVICES (Услуги)
+Excel --> xlsx : Сохранение в файл xlsx\n FINANCIAL (Сумма), SERVICES (Услуги)
+
+@enduml

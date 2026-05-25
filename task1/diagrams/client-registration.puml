@@ -1,0 +1,32 @@
+@startuml
+title Client Registration
+
+actor Администратор
+actor Клиент
+
+(1.0\nРегистрация клиента) as RegisterProc
+
+rectangle Excel
+rectangle Сканер
+rectangle "Файловый сервер" as fileServer
+rectangle Архив
+
+database "D1: Список Пациентов Excel" as xlsx
+database "D2: Файлы пациента" as patientFiles
+database "D3: Бумажные оригиналы документов" as patientDocs
+
+Клиент --> Администратор : Персональные данные, расширенная форма, согласие на обработку ПД\n PII, MEDICAL (Хронические заболевания)
+Администратор --> RegisterProc : Данные и документы клиента\n PII, MEDICAL (Хронические заболевания)
+
+RegisterProc --> Сканер : Документы клиента\n PII, MEDICAL (Хронические заболевания)
+Сканер --> fileServer : Сканы документов\n PII, MEDICAL (Хронические заболевания)
+fileServer --> patientFiles : Сканы документов\n PII, MEDICAL (Хронические заболевания)
+
+RegisterProc --> Excel : Данные пациента\n PII, MEDICAL (Хронические заболевания)
+Excel --> fileServer : Сохранение в файл xlsx\n PII, MEDICAL (Хронические заболевания)
+fileServer --> xlsx : Сохранение в файл xlsx\n PII, MEDICAL (Хронические заболевания)
+
+RegisterProc --> Архив : Оригиналы документов (согласие, форма)\n PII, MEDICAL (Хронические заболевания)
+Архив --> patientDocs : Оригиналы документов (согласие, форма)\n PII, MEDICAL (Хронические заболевания)
+
+@enduml

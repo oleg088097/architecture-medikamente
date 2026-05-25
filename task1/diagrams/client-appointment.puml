@@ -1,0 +1,24 @@
+@startuml
+title Client Appointment
+
+actor Администратор
+actor Клиент
+actor Врач
+
+(1.0\nЗапись клиента на приём) as AppointmentProc
+
+rectangle "Файловый сервер" as fileServer
+rectangle Excel
+
+database "D1: Файл журнала записи врача Excel" as xlsx
+
+Клиент --> Администратор : Персональные данные\n PII, APPOINTMENT (Дата, время, врач)
+Администратор --> AppointmentProc : Персональные данные\n PII, APPOINTMENT (Дата, время, врач)
+
+AppointmentProc --> Excel : Персональные данные\n PII, APPOINTMENT (Дата, время, врач)
+Excel --> fileServer : Сохранение в файл xlsx\n PII, APPOINTMENT (Дата, время, врач)
+fileServer --> xlsx : Сохранение в файл xlsx\n PII, APPOINTMENT (Дата, время, врач)
+
+Excel --> Врач : Просмотр журнала записи\n PII, APPOINTMENT (Дата, время, врач)
+
+@enduml

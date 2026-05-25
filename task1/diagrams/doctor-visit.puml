@@ -1,0 +1,26 @@
+@startuml
+title Doctor Visit
+
+actor Клиент
+actor Врач
+
+(1.0\nПосещение врача) as VisitProc
+
+rectangle "Файловый сервер" as fileServer
+rectangle Excel
+
+database "D1: Файл журнала записи врача Excel" as xlsx
+database "D2: Файлы пациента" as patientFiles
+
+xlsx --> fileServer : Доступ к журналу\n PII, APPOINTMENT (Дата, время, врач)
+fileServer --> Excel : Чтение файла\n PII, APPOINTMENT (Дата, время, врач)
+Excel --> Врач : Просмотр журнала записи\n PII, APPOINTMENT (Дата, время, врач)
+
+Клиент --> Врач : Персональные данные, жалобы\n PII, MEDICAL (Жалобы)
+
+Врач --> VisitProc : Персональные данные, жалобы\n PII, MEDICAL (Жалобы)
+
+VisitProc --> fileServer : Результаты посещения\n PII, MEDICAL (Жалобы, диагноз, назначения)
+fileServer --> patientFiles : Результаты посещения\n PII, MEDICAL (Жалобы, диагноз, назначения)
+
+@enduml

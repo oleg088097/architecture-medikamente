@@ -1,0 +1,26 @@
+@startuml
+title Accounting
+
+actor Бухгалтер
+
+(1.0\nБухгалтерский учёт) as AccountingProc
+
+rectangle ККМ
+rectangle "1С Бухгалтерия" as 1cF
+rectangle "1С Торговля и склад" as 1cW
+
+database "D1: Файл 1С Бухгалтерия" as 1cF_File
+database "D2: Файл 1С Торговля и склад" as 1cW_File
+
+
+Бухгалтер --> AccountingProc : Доходы, расходы, сотрудники, зарплаты, реквизиты\n PII, FINANCIAL
+
+ККМ --> AccountingProc : Внесение оплаты\n FINANCIAL (Сумма), SERVICES (Услуги)
+
+AccountingProc --> 1cF : Доходы, расходы, сотрудники, зарплаты, реквизиты\n PII, FINANCIAL, SERVICES
+1cF --> 1cF_File : Сохранение в файл\n PII, FINANCIAL, SERVICES
+
+1cW_File --> 1cW : Чтение данных ТМЦ\n FINANCIAL
+1cW --> AccountingProc : Данные ТМЦ\n FINANCIAL
+
+@enduml
