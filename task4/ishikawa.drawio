@@ -1,0 +1,106 @@
+<mxfile host="app.diagrams.net" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36">
+  <diagram name="Исикавы" id="b7a7eaba-c6c5-6fbe-34ae-1d3a4219ac39">
+    <mxGraphModel dx="1329" dy="1113" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="1169" pageHeight="826" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" style=";html=1;" />
+        <mxCell id="1" parent="0" style=";html=1;" />
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-41" edge="1" parent="1" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#333333;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="792.15380859375" y="823.1538273737981" as="sourcePoint" />
+            <mxPoint x="1620" y="823" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-42" parent="1" style="ellipse;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=12;spacing=6;" value="Снижение производительности и доступности при миграции на распределённую архитектуру" vertex="1">
+          <mxGeometry height="80" width="210" x="1620.00380859375" y="780.0038273737981" as="geometry" />
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-43" edge="1" parent="1" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#333333;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="Ro9FhMYlNAEa3tcLKUvH-44">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="972.15380859375" y="823.1538273737981" as="sourcePoint" />
+            <mxPoint x="812.15380859375" y="783.1538273737981" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-44" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=13;" value="Инфраструктура" vertex="1">
+          <mxGeometry height="40" width="200" x="712.15380859375" y="680.0038273737981" as="geometry" />
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-46" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;spacing=4;" value="В данный момент система состоит из 1 физического сервера. Для хранения резервных копий потребуется ещё один, а для повышения доступности системы — больше. Использование облака может быть невозможно ввиду регуляторных ограничений" vertex="1">
+          <mxGeometry height="84" width="255" x="684.65380859375" y="562.0038273737981" as="geometry" />
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-48" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;spacing=4;" value="Построение аналитики потребует вычислительных мощностей" vertex="1">
+          <mxGeometry height="44" width="255" x="684.65380859375" y="498.0038273737981" as="geometry" />
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-50" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;spacing=4;" value="Аналитика потребует дополнительных хранилищ кроме основных для хранения datalake и обработанных данных" vertex="1">
+          <mxGeometry height="64" width="255" x="684.65380859375" y="414.0038273737981" as="geometry" />
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-52" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;spacing=4;" value="AI-аналитика может потребовать графических ускорителей" vertex="1">
+          <mxGeometry height="44" width="255" x="684.65380859375" y="350.0038273737981" as="geometry" />
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-53" edge="1" parent="1" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#333333;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="Ro9FhMYlNAEa3tcLKUvH-54">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1252.15380859375" y="823.1538273737981" as="sourcePoint" />
+            <mxPoint x="1092.15380859375" y="563.1538273737981" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-54" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=13;" value="Программное обеспечение" vertex="1">
+          <mxGeometry height="40" width="220" x="997.50380859375" y="676.1538273737981" as="geometry" />
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-56" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;spacing=4;" value="Системы 1С ограничены в поддерживаемых интеграциях" vertex="1">
+          <mxGeometry height="44" width="255" x="980.00380859375" y="523.0038273737981" as="geometry" />
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-58" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;spacing=4;" value="Центральной частью системы становится МИС, который является сторонней разработкой и от него зависит производительность системы" vertex="1">
+          <mxGeometry height="64" width="255" x="980.00380859375" y="592.1538273737981" as="geometry" />
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-59" edge="1" parent="1" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#333333;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="Ro9FhMYlNAEa3tcLKUvH-60">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1532.15380859375" y="823.1538273737981" as="sourcePoint" />
+            <mxPoint x="1372.15380859375" y="563.1538273737981" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-60" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=13;" value="Интеграция" vertex="1">
+          <mxGeometry height="40" width="200" x="1287.50380859375" y="676.1538273737981" as="geometry" />
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-62" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;spacing=4;" value="Лаборатории имеют фиксированный API, который может быть неудобен для нового стека" vertex="1">
+          <mxGeometry height="44" width="255" x="1260.00380859375" y="523.0038273737981" as="geometry" />
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-64" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;spacing=4;" value="Разделение монолита увеличивает количество сетевых взаимодействий между частями системы и необходима пропускная способность сети" vertex="1">
+          <mxGeometry height="64" width="255" x="1260.00380859375" y="592.1538273737981" as="geometry" />
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-65" edge="1" parent="1" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#333333;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Ro9FhMYlNAEa3tcLKUvH-66">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1072.15380859375" y="823.1538273737981" as="sourcePoint" />
+            <mxPoint x="910" y="1000" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-66" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=13;" value="Персонал" vertex="1">
+          <mxGeometry height="40" width="150" x="801.50380859375" y="910.0038273737981" as="geometry" />
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-68" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;spacing=4;" value="IT-отдел из 3 специалистов маленький. Бизнес-аналитик не разработчик" vertex="1">
+          <mxGeometry height="44" width="255" x="749.00380859375" y="966.853827373798" as="geometry" />
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-70" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;spacing=4;" value="Отсутствие команды тестирования" vertex="1">
+          <mxGeometry height="44" width="255" x="749.00380859375" y="1026.853827373798" as="geometry" />
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-71" edge="1" parent="1" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#333333;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Ro9FhMYlNAEa3tcLKUvH-72">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1452.15380859375" y="823.1538273737981" as="sourcePoint" />
+            <mxPoint x="1092.15380859375" y="1043.153827373798" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-72" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=13;" value="Процессы" vertex="1">
+          <mxGeometry height="40" width="150" x="1202.50380859375" y="910.0038273737981" as="geometry" />
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-74" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;spacing=4;" value="Большое количество шифрования данных требует ресурсов" vertex="1">
+          <mxGeometry height="44" width="255" x="1150.00380859375" y="966.8538273737981" as="geometry" />
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-76" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;spacing=4;" value="Сбор логов для анализа также требует пропускной способности и дополнительных вычислительных мощностей" vertex="1">
+          <mxGeometry height="64" width="255" x="1150.00380859375" y="1030.853827373798" as="geometry" />
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-78" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;spacing=4;" value="ABAC-правила требуют настройки и времени для вычисления" vertex="1">
+          <mxGeometry height="44" width="255" x="1150.00380859375" y="1114.853827373798" as="geometry" />
+        </mxCell>
+        <mxCell id="Ro9FhMYlNAEa3tcLKUvH-80" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;spacing=4;" value="Миграция данных из Excel" vertex="1">
+          <mxGeometry height="44" width="255" x="1150.00380859375" y="1180.0038273737978" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
