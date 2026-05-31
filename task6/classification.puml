@@ -15,15 +15,23 @@ System_Ext(onec, "1С", "FINANCIAL данные")
 
 System_Ext(tagging, "Data Classification & Tagging Service", "Политики тегов и ABAC")
 System_Ext(vault, "Vault / KMS", "Ключи шифрования зон хранилища")
-System_Ext(opensearch, "OpenSearch + Wazuh", "Аудит и алертинг")
+System_Ext(opensearch, "OpenSearch + Wazuh", "Метрики, аудит и алертинг")
 
 Container_Boundary(pipeline, "") {
 
     Container(ingestion, "Batch Ingestion Service", "Airflow", "Пакетное извлечение данных из источников")
+    note left
+    Scalability
+     Параллельная обработка батчей или замена на stream-processing
+    end note
 
     Container(registry, "Schema Registry", "Data Catalog", "Версионирование схем, обнаружение структурных изменений")
 
     Container(classifier, "Classification Engine", "Rules + Regex + ML", "Автоматическая разметка: PII, MEDICAL, FINANCIAL, SERVICES, CONSENT")
+    note left
+    Scalability
+     Горизонтальное масшабирование
+    end note
 
     Container(review, "Data Steward UI", "Web-приложение", "Очередь ручной проверки для записей с низким confidence score")
 
@@ -32,6 +40,10 @@ Container_Boundary(pipeline, "") {
     Container(scanner, "Sensitive Data Scanner", "Сервис", "Контроль анонимизации: поиск утечек PII/MEDICAL")
 
     ContainerDb(rawStorage, "Raw Data Storage", "Object Storage", "Сырые данные as-is, ограниченный доступ, шифрование")
+    note left
+    Scalability
+     Удаление данных после успешного сохранения в trustedStorage
+    end note
 
     ContainerDb(classifiedStorage, "Classified Data Storage", "Object Storage", "Данные + метаданные классов конфиденциальности, шифрование")
 
@@ -40,6 +52,10 @@ Container_Boundary(pipeline, "") {
     Container(datamartBuilder, "Datamart Builder", "Airflow", "Агрегация и feature-подготовка")
 
     ContainerDb(analyticsStorage, "Analytics Data Storage", "Data Lake", "Данные для BI/ML/AI, read-only доступ, шифрование")
+    note left
+    Scalability
+     Read-реплики, разделение данных на партиции
+    end note
 
     Container(analytics, "Analytics Service", "BI/ML/AI", "Отчёты и модели")
 }
@@ -65,7 +81,6 @@ Rel(review, classifier, "Обновлённые метки")
 Rel(classifiedStorage, anonymizer, "Передача для обезличивания")
 Rel(anonymizer, scanner, "Проверка")
 Rel(scanner, trustedStorage, "Сохранение при отсутствии утечек")
-Rel(scanner, opensearch, "Leak rate, false negative alerts")
 
 Rel(trustedStorage, datamartBuilder, "Чтение данных для построения витрин")
 Rel(datamartBuilder, analyticsStorage, "Запись готовых для использования витрин данных")
@@ -73,6 +88,18 @@ Rel(analyticsStorage, analytics, "Read-only запросы")
 Rel(analyst, analytics, "Аналитика")
 
 Rel(classifier, opensearch, "Coverage, confidence, tag anomalies")
+note on link
+Metrics
+Аномалии в тегах - классификация работает некорректно
+Низкие confidence - требуется добавить или адаптировать классификаторы
+end note
+
+
+Rel(scanner, opensearch, "Leak rate, false negatives")
+note on link
+Metrics
+Пропущены чувствительные данные - требуется усиление классификаторов
+end note
 
 Rel(vault, rawStorage, "Ключи шифрования")
 Rel(vault, classifiedStorage, "Ключи шифрования")
