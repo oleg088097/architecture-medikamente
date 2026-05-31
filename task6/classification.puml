@@ -1,0 +1,85 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Классификация данных
+
+Person(analyst, "Аналитик")
+Person(steward, "Data Steward")
+Person(engineer, "Data Engineer")
+
+System_Ext(mis, "МИС", "MEDICAL данные")
+System_Ext(crm, "CRM", "PII данные")
+System_Ext(onec, "1С", "FINANCIAL данные")
+
+System_Ext(tagging, "Data Classification & Tagging Service", "Политики тегов и ABAC")
+System_Ext(vault, "Vault / KMS", "Ключи шифрования зон хранилища")
+System_Ext(opensearch, "OpenSearch + Wazuh", "Аудит и алертинг")
+
+Container_Boundary(pipeline, "") {
+
+    Container(ingestion, "Batch Ingestion Service", "Airflow", "Пакетное извлечение данных из источников")
+
+    Container(registry, "Schema Registry", "Data Catalog", "Версионирование схем, обнаружение структурных изменений")
+
+    Container(classifier, "Classification Engine", "Rules + Regex + ML", "Автоматическая разметка: PII, MEDICAL, FINANCIAL, SERVICES, CONSENT")
+
+    Container(review, "Data Steward UI", "Web-приложение", "Очередь ручной проверки для записей с низким confidence score")
+
+    Container(anonymizer, "Anonymization Service", "Сервис", "Псевдонимизация, маскирование и удаление чувствительных полей")
+
+    Container(scanner, "Sensitive Data Scanner", "Сервис", "Контроль анонимизации: поиск утечек PII/MEDICAL")
+
+    ContainerDb(rawStorage, "Raw Data Storage", "Object Storage", "Сырые данные as-is, ограниченный доступ, шифрование")
+
+    ContainerDb(classifiedStorage, "Classified Data Storage", "Object Storage", "Данные + метаданные классов конфиденциальности, шифрование")
+
+    ContainerDb(trustedStorage, "Trusted Data Storage", "Object Storage", "Проверенные и обезличенные данные, шифрование")
+
+    Container(datamartBuilder, "Datamart Builder", "Airflow", "Агрегация и feature-подготовка")
+
+    ContainerDb(analyticsStorage, "Analytics Data Storage", "Data Lake", "Данные для BI/ML/AI, read-only доступ, шифрование")
+
+    Container(analytics, "Analytics Service", "BI/ML/AI", "Отчёты и модели")
+}
+
+Rel(mis, ingestion, "Пакетная выгрузка", "TLS")
+Rel(crm, ingestion, "Пакетная выгрузка", "TLS")
+Rel(onec, ingestion, "Пакетная выгрузка", "TLS")
+
+Rel(engineer, registry, "Регистрация схем")
+
+Rel(ingestion, registry, "Валидация и регистрация схемы")
+Rel(ingestion, rawStorage, "Запись сырых данных", "TLS")
+
+Rel(rawStorage, classifier, "Чтение для классификации")
+Rel(registry, classifier, "Актуальная версия схемы")
+Rel(tagging, classifier, "Политики тегов и правила по умолчанию")
+
+Rel(classifier, classifiedStorage, "Запись данных с метаданными классов")
+Rel(classifier, review, "Записи с низким confidence")
+Rel(steward, review, "Подтверждение / исправление тегов")
+Rel(review, classifier, "Обновлённые метки")
+
+Rel(classifiedStorage, anonymizer, "Передача для обезличивания")
+Rel(anonymizer, scanner, "Проверка")
+Rel(scanner, trustedStorage, "Сохранение при отсутствии утечек")
+Rel(scanner, opensearch, "Leak rate, false negative alerts")
+
+Rel(trustedStorage, datamartBuilder, "Чтение данных для построения витрин")
+Rel(datamartBuilder, analyticsStorage, "Запись готовых для использования витрин данных")
+Rel(analyticsStorage, analytics, "Read-only запросы")
+Rel(analyst, analytics, "Аналитика")
+
+Rel(classifier, opensearch, "Coverage, confidence, tag anomalies")
+
+Rel(vault, rawStorage, "Ключи шифрования")
+Rel(vault, classifiedStorage, "Ключи шифрования")
+Rel(vault, trustedStorage, "Ключи шифрования")
+Rel(vault, analyticsStorage, "Ключи шифрования")
+Rel(vault, classifier, "Ключи шифрования")
+Rel(vault, anonymizer, "Ключи шифрования")
+Rel(vault, analytics, "Ключи шифрования")
+
+@enduml
