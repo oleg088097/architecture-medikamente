@@ -1,0 +1,45 @@
+@startuml
+title Payment
+
+actor Администратор
+actor Клиент
+actor Кассир
+
+(1.0\nОбработка оплаты) as PaymentProc
+
+rectangle ККМ
+rectangle Excel
+rectangle "1С Бухгалтерия" as 1cF
+
+database "D1: Файл 1С Бухгалтерия" as 1cF_File
+database "D2: Файл счетов Excel" as xlsx
+
+Администратор --> Клиент : Счёт на оплату\n FINANCIAL (Сумма), SERVICES (Услуги)
+Клиент --> Кассир : Счёт на оплату\n FINANCIAL (Сумма), SERVICES (Услуги)
+Кассир --> PaymentProc : Данные оплаты\n FINANCIAL (Сумма), SERVICES (Услуги)
+
+PaymentProc --> Клиент : Чек\n FINANCIAL (Сумма), SERVICES (Услуги)
+
+PaymentProc --> ККМ : Внесение оплаты\n FINANCIAL (Сумма), SERVICES (Услуги)
+ККМ --> 1cF : Регистрация оплаты\n FINANCIAL (Сумма), SERVICES (Услуги)
+note on link
+ TODO
+ Шифровать данные при передаче по сети (TLS)
+end note
+1cF --> 1cF_File : Сохранение в файл\n FINANCIAL (Сумма), SERVICES (Услуги)
+note on link
+ TODO
+ Заменить на клиент-серверный вариант
+ Хранить данные на защищённом сервере и делать резервные копии
+ Шифровать данные на сервере
+ Ограничить доступ к данным в  1С
+ Шифровать данные при передаче по сети (TLS)
+end note
+PaymentProc --> Excel : Внесение оплаты\n FINANCIAL (Сумма), SERVICES (Услуги)
+note on link
+ TODO
+ Устранить дублирующийся незащищённый поток и работать через 1С
+end note
+Excel --> xlsx : Сохранение в файл xlsx\n FINANCIAL (Сумма), SERVICES (Услуги)
+
+@enduml
